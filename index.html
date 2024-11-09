@@ -1,97 +1,92 @@
 <!DOCTYPE html>
-<meta charset="UTF-8">
 <html>
-<body>
+<head>
+    <meta charset="UTF-8">
+    <title>レスポンシブ計算機</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+        }
         .calculator {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .display {
+            width: 100%;
+            font-size: 2em;
+            text-align: right;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        .buttons {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             grid-gap: 5px;
-            max-width: 500px;
-            margin: auto;
         }
-
-        button {
-            width: 100%;
-            padding: 20px;
-            background-color: bisque;
+        .buttons button {
+            font-size: 1.5em;
+            padding: 15px;
+            background-color: burlywood;
             font-weight: bold;
-            font-size: 18px;
+            border: dashed 2px white;
             box-sizing: border-box;
-        }
-
-        input {
-            font-size: 28px;
-            text-align: right;
             width: 100%;
-            box-sizing: border-box;
-            padding: 10px;
-            margin-bottom: 10px;
+            height: 100%;
         }
-
-        body {
-            padding: 20px;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .display {
-            max-width: 500px;
-            margin: auto;
+        .buttons button:active {
+            background-color: darkorange;
         }
     </style>
+</head>
+<body>
+    <div class="calculator">
+        <div>Hello WebCalc!</div>
+        <input class="display" readonly /><br />
+        <div class="buttons">
+            <button onclick="append('1')">1</button>
+            <button onclick="append('2')">2</button>
+            <button onclick="append('3')">3</button>
+            <button onclick="append('4')">4</button>
+            <button onclick="append('5')">5</button>
 
-    <div class="display">
-        <div>Hello WebCalc!(2.0)</div>
-        <input /><br />
+            <button onclick="append('6')">6</button>
+            <button onclick="append('7')">7</button>
+            <button onclick="append('8')">8</button>
+            <button onclick="append('9')">9</button>
+            <button onclick="append('0')">0</button>
+
+            <button onclick="append('.')">.</button>
+            <button onclick="append('+')">+</button>
+            <button onclick="append('-')">−</button>
+            <button onclick="append('*')">×</button>
+            <button onclick="append('/')">÷</button>
+
+            <button onclick="append('**')">^</button>
+            <button onclick="append('**0.5')">√</button>
+            <button onclick="calc()">=</button>
+            <button onclick="update('')">CLR</button>
+        </div>
     </div>
-
     <script>
-        function update(_v) // inputタグを更新する関数
-        {
-            document.querySelector('input').value = _v
+        function update(_v) {
+            document.querySelector('.display').value = _v;
         }
-
-        function append(_v) // 数字ボタンが押されたので数字を後ろに追加する
-        {
-            document.querySelector('input').value += _v
+        function append(_v) {
+            document.querySelector('.display').value += _v;
         }
-
-        function calc() // 「＝」ボタンが押されたので計算する
-        {
-            const v = document.querySelector('input').value
+        function calc() {
+            const v = document.querySelector('.display').value;
             try {
-                const f = new Function('return ' + v)
-                update(f().toString())
+                const f = new Function('return ' + v);
+                update(f().toString());
             } catch (_error) {
-                update('Error') // 計算に失敗した場合はエラーと表示する
+                update('Error');
             }
         }
     </script>
-
-    <div class="calculator">
-        <button onclick="append('1')">1</button>
-        <button onclick="append('2')">2</button>
-        <button onclick="append('3')">3</button>
-        <button onclick="append('4')">4</button>
-        <button onclick="append('5')">5</button>
-
-        <button onclick="append('6')">6</button>
-        <button onclick="append('7')">7</button>
-        <button onclick="append('8')">8</button>
-        <button onclick="append('9')">9</button>
-        <button onclick="append('0')">0</button>
-
-        <button onclick="append('.')">.</button>
-        <button onclick="append('+')">+</button>
-        <button onclick="append('-')">−</button>
-        <button onclick="append('*')">×</button>
-        <button onclick="append('/')">÷</button>
-
-        <button onclick="append('**')">^</button>
-        <button onclick="append('**0.5')">√</button>
-        <button onclick="calc()">=</button>
-        <button onclick="update('')">CLR</button>
-    </div>
 </body>
 </html>
