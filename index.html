@@ -54,7 +54,7 @@
                 "seven eight nine divide"
                 "four five six multiply"
                 "one two three minus"
-                "zero dot equal plus";
+                "zero ac equal plus";
             grid-gap: 10px;
         }
         .buttons button {
@@ -76,14 +76,23 @@
         .buttons button:active {
             transform: scale(0.95);
         }
-        /* 演算子ボタンの色を変更 */
+        /* グリッドエリアの指定 */
+        .buttons .ac { grid-area: ac; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
         .buttons .divide { grid-area: divide; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
         .buttons .multiply { grid-area: multiply; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
         .buttons .minus { grid-area: minus; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
         .buttons .plus { grid-area: plus; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
         .buttons .equal { grid-area: equal; background: linear-gradient(135deg, #3e2723, #5d4037); }
-        .buttons .dot { grid-area: dot; }
         .buttons .zero { grid-area: zero; }
+        .buttons .one { grid-area: one; }
+        .buttons .two { grid-area: two; }
+        .buttons .three { grid-area: three; }
+        .buttons .four { grid-area: four; }
+        .buttons .five { grid-area: five; }
+        .buttons .six { grid-area: six; }
+        .buttons .seven { grid-area: seven; }
+        .buttons .eight { grid-area: eight; }
+        .buttons .nine { grid-area: nine; }
     </style>
 </head>
 <body>
@@ -94,38 +103,77 @@
             <button onclick="append('7')" class="seven">7</button>
             <button onclick="append('8')" class="eight">8</button>
             <button onclick="append('9')" class="nine">9</button>
-            <button onclick="append('/')" class="divide">÷</button>
+            <button onclick="appendOperator('/')" class="divide">÷</button>
 
             <button onclick="append('4')" class="four">4</button>
             <button onclick="append('5')" class="five">5</button>
             <button onclick="append('6')" class="six">6</button>
-            <button onclick="append('*')" class="multiply">×</button>
+            <button onclick="appendOperator('*')" class="multiply">×</button>
 
             <button onclick="append('1')" class="one">1</button>
             <button onclick="append('2')" class="two">2</button>
             <button onclick="append('3')" class="three">3</button>
-            <button onclick="append('-')" class="minus">−</button>
+            <button onclick="appendOperator('-')" class="minus">−</button>
 
             <button onclick="append('0')" class="zero">0</button>
-            <button onclick="append('.')" class="dot">.</button>
+            <button onclick="clearDisplay()" class="ac">AC</button>
             <button onclick="calc()" class="equal">=</button>
-            <button onclick="append('+')" class="plus">+</button>
+            <button onclick="appendOperator('+')" class="plus">+</button>
         </div>
     </div>
+    <!-- math.js ライブラリの読み込み -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
     <script>
+        let isCalculated = false;
+
         function update(_v) {
             document.querySelector('.display').value = _v;
         }
         function append(_v) {
+            if (isCalculated) {
+                update('');
+                isCalculated = false;
+            }
             document.querySelector('.display').value += _v;
         }
+        function clearDisplay() {
+            update('');
+            isCalculated = false;
+        }
+        function appendOperator(op) {
+            const display = document.querySelector('.display');
+            let currentValue = display.value;
+            const lastChar = currentValue.slice(-1);
+            const operators = ['+', '-', '*', '/'];
+
+            if (isCalculated) {
+                isCalculated = false;
+            }
+
+            if (operators.includes(lastChar)) {
+                // 既に演算子が入力されている場合、最後の演算子を置き換える
+                currentValue = currentValue.slice(0, -1);
+            }
+            display.value = currentValue + op;
+        }
         function calc() {
-            const v = document.querySelector('.display').value;
+            let v = document.querySelector('.display').value;
+            const operators = ['+', '-', '*', '/'];
+            // 式の末尾にある演算子を削除
+            while (operators.includes(v.slice(-1))) {
+                v = v.slice(0, -1);
+            }
             try {
-                const f = new Function('return ' + v);
-                update(f().toString());
+                const result = math.evaluate(v);
+                if (!isFinite(result) || isNaN(result)) {
+                    update('Error');
+                } else {
+                    update(result.toString());
+                }
+                isCalculated = true;
             } catch (_error) {
                 update('Error');
+                isCalculated = false;
             }
         }
     </script>
