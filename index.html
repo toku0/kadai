@@ -2,73 +2,114 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>レスポンシブ計算機</title>
+    <title>木目調の計算機</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        /* フォントの設定 */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&display=swap');
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f5f5dc; /* ベージュ色の背景 */
             padding: 20px;
             margin: 0;
         }
         .calculator {
-            max-width: 500px;
+            max-width: 400px;
             margin: 0 auto;
+            background-color: #fffaf0; /* フローラルホワイト */
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(139, 69, 19, 0.3); /* サドルブラウンの影 */
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png'); /* 木目の背景パターン */
+            background-size: cover;
+            position: relative;
+        }
+        .calculator::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: calc(50% - 25px);
+            width: 50px;
+            height: 50px;
+            background-image: url('https://img.icons8.com/ios-filled/100/8B4513/oak-tree.png'); /* 木のアイコン */
+            background-size: contain;
+            background-repeat: no-repeat;
         }
         .display {
             width: 100%;
             font-size: 2em;
             text-align: right;
             padding: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             box-sizing: border-box;
+            border-radius: 15px;
+            border: 2px solid #8b4513; /* サドルブラウンのボーダー */
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明の白色背景 */
         }
         .buttons {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            grid-gap: 5px;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-areas:
+                "seven eight nine divide"
+                "four five six multiply"
+                "one two three minus"
+                "zero dot equal plus";
+            grid-gap: 10px;
         }
         .buttons button {
-            font-size: 1.5em;
-            padding: 15px;
-            background-color: burlywood;
+            font-size: 2em; /* フォントサイズを大きく */
+            padding: 0;
             font-weight: bold;
-            border: dashed 2px white;
+            border: none;
+            border-radius: 50%;
             box-sizing: border-box;
+            color: #fff;
+            background: linear-gradient(135deg, #8b4513, #a0522d); /* 茶色のグラデーション */
+            transition: background 0.3s, transform 0.1s;
             width: 100%;
-            height: 100%;
+            aspect-ratio: 1;
+        }
+        .buttons button:hover {
+            background: linear-gradient(135deg, #a0522d, #cd853f); /* 明るめの茶色グラデーション */
         }
         .buttons button:active {
-            background-color: darkorange;
+            transform: scale(0.95);
         }
+        /* 演算子ボタンの色を変更 */
+        .buttons .divide { grid-area: divide; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
+        .buttons .multiply { grid-area: multiply; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
+        .buttons .minus { grid-area: minus; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
+        .buttons .plus { grid-area: plus; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
+        .buttons .equal { grid-area: equal; background: linear-gradient(135deg, #3e2723, #5d4037); }
+        .buttons .dot { grid-area: dot; }
+        .buttons .zero { grid-area: zero; }
     </style>
 </head>
 <body>
     <div class="calculator">
-        <div>Hello WebCalc!</div>
+        <div style="text-align: center; font-size: 2em; margin-bottom: 20px;">木目調の計算機</div>
         <input class="display" readonly /><br />
         <div class="buttons">
-            <button onclick="append('1')">1</button>
-            <button onclick="append('2')">2</button>
-            <button onclick="append('3')">3</button>
-            <button onclick="append('4')">4</button>
-            <button onclick="append('5')">5</button>
+            <button onclick="append('7')" class="seven">7</button>
+            <button onclick="append('8')" class="eight">8</button>
+            <button onclick="append('9')" class="nine">9</button>
+            <button onclick="append('/')" class="divide">÷</button>
 
-            <button onclick="append('6')">6</button>
-            <button onclick="append('7')">7</button>
-            <button onclick="append('8')">8</button>
-            <button onclick="append('9')">9</button>
-            <button onclick="append('0')">0</button>
+            <button onclick="append('4')" class="four">4</button>
+            <button onclick="append('5')" class="five">5</button>
+            <button onclick="append('6')" class="six">6</button>
+            <button onclick="append('*')" class="multiply">×</button>
 
-            <button onclick="append('.')">.</button>
-            <button onclick="append('+')">+</button>
-            <button onclick="append('-')">−</button>
-            <button onclick="append('*')">×</button>
-            <button onclick="append('/')">÷</button>
+            <button onclick="append('1')" class="one">1</button>
+            <button onclick="append('2')" class="two">2</button>
+            <button onclick="append('3')" class="three">3</button>
+            <button onclick="append('-')" class="minus">−</button>
 
-            <button onclick="append('**')">^</button>
-            <button onclick="append('**0.5')">√</button>
-            <button onclick="calc()">=</button>
-            <button onclick="update('')">CLR</button>
+            <button onclick="append('0')" class="zero">0</button>
+            <button onclick="append('.')" class="dot">.</button>
+            <button onclick="calc()" class="equal">=</button>
+            <button onclick="append('+')" class="plus">+</button>
         </div>
     </div>
     <script>
