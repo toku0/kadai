@@ -240,7 +240,7 @@
                 const result = math.evaluate(v);
                 if (!isFinite(result) || isNaN(result)) {
                     // Display "0" for undefined or invalid results
-                    update('0');
+                    update('Error');
                 } else {
                     update(result.toString());
                 }
