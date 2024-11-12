@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>計算機</title>
@@ -10,21 +11,27 @@
 
         body {
             font-family: 'Noto Sans JP', sans-serif;
-            background-color: #f5f5dc; /* ベージュ色の背景 */
+            background-color: #f5f5dc;
+            /* ベージュ色の背景 */
             padding: 20px;
             margin: 0;
         }
+
         .calculator {
             max-width: 400px;
             margin: 0 auto;
-            background-color: #fffaf0; /* フローラルホワイト */
+            background-color: #fffaf0;
+            /* フローラルホワイト */
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 0 15px rgba(139, 69, 19, 0.3); /* サドルブラウンの影 */
-            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png'); /* 木目の背景パターン */
+            box-shadow: 0 0 15px rgba(139, 69, 19, 0.3);
+            /* サドルブラウンの影 */
+            background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+            /* 木目の背景パターン */
             background-size: cover;
             position: relative;
         }
+
         .calculator::before {
             content: '';
             position: absolute;
@@ -32,10 +39,12 @@
             left: calc(50% - 25px);
             width: 50px;
             height: 50px;
-            background-image: url('https://img.icons8.com/ios-filled/100/8B4513/oak-tree.png'); /* 木のアイコン */
+            background-image: url('https://img.icons8.com/ios-filled/100/8B4513/oak-tree.png');
+            /* 木のアイコン */
             background-size: contain;
             background-repeat: no-repeat;
         }
+
         .display {
             width: 100%;
             font-size: 2em;
@@ -44,9 +53,12 @@
             margin-bottom: 20px;
             box-sizing: border-box;
             border-radius: 15px;
-            border: 2px solid #8b4513; /* サドルブラウンのボーダー */
-            background-color: rgba(255, 255, 255, 0.8); /* 半透明の白色背景 */
+            border: 2px solid #8b4513;
+            /* サドルブラウンのボーダー */
+            background-color: rgba(255, 255, 255, 0.8);
+            /* 半透明の白色背景 */
         }
+
         .buttons {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -57,44 +69,105 @@
                 "zero ac equal plus";
             grid-gap: 10px;
         }
+
         .buttons button {
-            font-size: 2em; /* フォントサイズを大きく */
+            font-size: 2em;
+            /* フォントサイズを大きく */
             padding: 0;
             font-weight: bold;
             border: none;
             border-radius: 50%;
             box-sizing: border-box;
             color: #fff;
-            background: linear-gradient(135deg, #8b4513, #a0522d); /* 茶色のグラデーション */
+            background: linear-gradient(135deg, #8b4513, #a0522d);
+            /* 茶色のグラデーション */
             transition: background 0.3s, transform 0.1s;
             width: 100%;
             aspect-ratio: 1;
         }
+
         .buttons button:hover {
-            background: linear-gradient(135deg, #a0522d, #cd853f); /* 明るめの茶色グラデーション */
+            background: linear-gradient(135deg, #a0522d, #cd853f);
+            /* 明るめの茶色グラデーション */
         }
+
         .buttons button:active {
             transform: scale(0.95);
         }
+
         /* グリッドエリアの指定 */
-        .buttons .ac { grid-area: ac; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
-        .buttons .divide { grid-area: divide; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
-        .buttons .multiply { grid-area: multiply; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
-        .buttons .minus { grid-area: minus; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
-        .buttons .plus { grid-area: plus; background: linear-gradient(135deg, #5a3d2b, #8b4513); }
-        .buttons .equal { grid-area: equal; background: linear-gradient(135deg, #3e2723, #5d4037); }
-        .buttons .zero { grid-area: zero; }
-        .buttons .one { grid-area: one; }
-        .buttons .two { grid-area: two; }
-        .buttons .three { grid-area: three; }
-        .buttons .four { grid-area: four; }
-        .buttons .five { grid-area: five; }
-        .buttons .six { grid-area: six; }
-        .buttons .seven { grid-area: seven; }
-        .buttons .eight { grid-area: eight; }
-        .buttons .nine { grid-area: nine; }
+        .buttons .ac {
+            grid-area: ac;
+            background: linear-gradient(135deg, #5a3d2b, #8b4513);
+        }
+
+        .buttons .divide {
+            grid-area: divide;
+            background: linear-gradient(135deg, #5a3d2b, #8b4513);
+        }
+
+        .buttons .multiply {
+            grid-area: multiply;
+            background: linear-gradient(135deg, #5a3d2b, #8b4513);
+        }
+
+        .buttons .minus {
+            grid-area: minus;
+            background: linear-gradient(135deg, #5a3d2b, #8b4513);
+        }
+
+        .buttons .plus {
+            grid-area: plus;
+            background: linear-gradient(135deg, #5a3d2b, #8b4513);
+        }
+
+        .buttons .equal {
+            grid-area: equal;
+            background: linear-gradient(135deg, #3e2723, #5d4037);
+        }
+
+        .buttons .zero {
+            grid-area: zero;
+        }
+
+        .buttons .one {
+            grid-area: one;
+        }
+
+        .buttons .two {
+            grid-area: two;
+        }
+
+        .buttons .three {
+            grid-area: three;
+        }
+
+        .buttons .four {
+            grid-area: four;
+        }
+
+        .buttons .five {
+            grid-area: five;
+        }
+
+        .buttons .six {
+            grid-area: six;
+        }
+
+        .buttons .seven {
+            grid-area: seven;
+        }
+
+        .buttons .eight {
+            grid-area: eight;
+        }
+
+        .buttons .nine {
+            grid-area: nine;
+        }
     </style>
 </head>
+
 <body>
     <div class="calculator">
         <div style="text-align: center; font-size: 2em; margin-bottom: 20px;">計算機</div>
@@ -159,23 +232,25 @@
         function calc() {
             let v = document.querySelector('.display').value;
             const operators = ['+', '-', '*', '/'];
-            // 式の末尾にある演算子を削除
+            // Remove any trailing operators from the expression
             while (operators.includes(v.slice(-1))) {
                 v = v.slice(0, -1);
             }
             try {
                 const result = math.evaluate(v);
                 if (!isFinite(result) || isNaN(result)) {
-                    update('Error');
+                    // Display "0" for undefined or invalid results
+                    update('0');
                 } else {
                     update(result.toString());
                 }
                 isCalculated = true;
             } catch (_error) {
-                update('Error');
+                update('0');  // Display "0" if there's an error in evaluation
                 isCalculated = false;
             }
         }
+
     </script>
 </body>
 </html>
